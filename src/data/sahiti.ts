@@ -8,8 +8,23 @@ import literature from "@/assets/literature.jpg";
 import festival from "@/assets/festival.jpg";
 import language from "@/assets/language.jpg";
 import history from "@/assets/history.jpg";
+import satavahana from "@/assets/satavahana.jpg";
+import vijayanagara from "@/assets/vijayanagara.jpg";
+import colonial from "@/assets/colonial.jpg";
 
-export const images = { hero, drama, music, dance, literature, festival, language, history };
+export const images = {
+  hero,
+  drama,
+  music,
+  dance,
+  literature,
+  festival,
+  language,
+  history,
+  satavahana,
+  vijayanagara,
+  colonial,
+};
 
 export const navLinks = [
   { label: "Explore", href: "#explore" },
@@ -67,16 +82,25 @@ export const arts = [
 ];
 
 export type TimelineItem = { era: string; te: string; text: string; image?: string };
+// Historical Timeline Images & Licensing Attribution:
+// - Ancient: language.jpg (Telugu manuscript & ink script)
+// - Satavahana: satavahana.jpg (2nd Century CE Amaravati Stupa Buddha relief, Indian Museum Kolkata; Wikimedia Commons CC BY-SA 4.0, G41rn8)
+// - Kakatiya: history.jpg (Kakatiya stone arch / Warangal heritage gateway)
+// - Vijayanagara: vijayanagara.jpg (16th Century Stone Chariot, Vittala Temple, Hampi, Vijayanagara Empire; Wikimedia Commons CC BY-SA 4.0, Prashmob)
+// - Colonial: colonial.jpg (1819 engraving of historical printing press; Wikimedia Commons Public Domain, W. Lowry / J. Farey)
+// - Modern: festival.jpg (Living Sankranti celebrations & community traditions)
 export const timeline: TimelineItem[] = [
   {
     era: "Ancient",
     te: "ప్రాచీనం",
     text: "Early inscriptions offer glimpses of a language taking shape.",
+    image: language,
   },
   {
     era: "Satavahana",
     te: "శాతవాహన",
     text: "An era often associated with trade and the growth of a regional identity.",
+    image: satavahana,
   },
   {
     era: "Kakatiya",
@@ -88,12 +112,13 @@ export const timeline: TimelineItem[] = [
     era: "Vijayanagara",
     te: "విజయనగర",
     text: "A period known for courtly poetry and literary patronage.",
-    image: literature,
+    image: vijayanagara,
   },
   {
     era: "Colonial",
     te: "వలస యుగం",
     text: "Printing presses and new forms of prose reached wider readers.",
+    image: colonial,
   },
   {
     era: "Modern",
