@@ -11,10 +11,12 @@ import {
   navLinks,
   stories,
   timeline,
-  type CulturalArea,
   type SahitiEvent,
 } from "@/data/sahiti";
 import { ArrowLink, Reveal, SectionHeading } from "./primitives";
+import { CulturalExplorer } from "./CulturalExplorer";
+import { HistoryTimeline } from "./HistoryTimeline";
+import { GalleryLightbox } from "./GalleryLightbox";
 import { cn } from "@/lib/utils";
 
 const wrap = "mx-auto max-w-[1400px] px-6 md:px-10";
@@ -45,8 +47,8 @@ export function Hero() {
           A living expression of Telugu.
         </p>
         <div className="anim-rise mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8" style={{ animationDelay: "1.7s" }}>
-          <a href="#explore" className="eyebrow inline-flex items-center justify-center gap-3 bg-maroon px-8 py-5 text-on-dark transition-colors hover:bg-terracotta">
-            Explore Sahiti <span aria-hidden>→</span>
+          <a href="#explore" className="group eyebrow inline-flex items-center justify-center gap-3 bg-maroon px-8 py-5 text-on-dark transition-colors hover:bg-terracotta">
+            Explore Sahiti <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">→</span>
           </a>
           <ArrowLink href="#culture" tone="dark">Discover Telugu</ArrowLink>
         </div>
@@ -80,38 +82,14 @@ export function Intro() {
   );
 }
 
-function CulturalCard({ area, i }: { area: CulturalArea; i: number }) {
-  return (
-    <Reveal delay={(i % 3) * 120}>
-      <a href="#culture" className="group block">
-        <div className="aspect-[4/5] overflow-hidden bg-ivory-deep">
-          <img src={area.image} alt={area.en} loading="lazy" width={1024} height={1280} className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]" />
-        </div>
-        <div className="mt-6 flex items-baseline justify-between border-t border-border pt-5 transition-transform duration-500 group-hover:translate-x-1">
-          <div>
-            <p className="eyebrow text-muted-foreground">0{i + 1} · {area.en}</p>
-            <p lang="te" className="font-te mt-3 text-3xl text-maroon">{area.te}</p>
-          </div>
-          <span aria-hidden className="text-terracotta opacity-0 transition-opacity duration-500 group-hover:opacity-100">→</span>
-        </div>
-        <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">{area.text}</p>
-      </a>
-    </Reveal>
-  );
-}
-
 export function TeluguWorld() {
   return (
     <section id="culture" className="bg-background pb-32 md:pb-44">
       <div className={wrap}>
         <SectionHeading index="02" te="తెలుగు" en="The World of Telugu" />
-        <div className="mt-20 grid gap-x-10 gap-y-20 sm:grid-cols-2 lg:grid-cols-3">
-          {culturalAreas.map((a, i) => (
-            <div key={a.en} className={cn(i % 3 === 1 && "lg:mt-24")}>
-              <CulturalCard area={a} i={i} />
-            </div>
-          ))}
-        </div>
+        <Reveal className="mt-20">
+          <CulturalExplorer areas={culturalAreas} />
+        </Reveal>
       </div>
     </section>
   );
@@ -154,26 +132,11 @@ export function Timeline() {
     <section className="overflow-hidden bg-ivory-deep py-28 md:py-40">
       <div className={wrap}>
         <SectionHeading index="04" te="చరిత్ర" en="Telugu Through Time" />
-        <p className="mt-6 max-w-lg text-sm text-muted-foreground">An introductory sketch of eras — sample content for demonstration only.</p>
+        <p className="mt-6 max-w-lg text-sm text-muted-foreground">An introductory sketch of eras — sample content for demonstration only. Select an era to explore.</p>
+        <Reveal className="mt-20">
+          <HistoryTimeline items={timeline} />
+        </Reveal>
       </div>
-      <ol className={cn(wrap, "relative mt-20 grid gap-12 border-l border-border pl-8 md:flex md:gap-0 md:overflow-x-auto md:border-l-0 md:border-t md:pl-10 md:pt-0 md:pb-6")}>
-        {timeline.map((t, i) => (
-          <li key={t.era} className="relative md:min-w-[300px] md:flex-1 md:pr-10 md:pt-12">
-            <span className="absolute -left-[37px] top-2 h-2 w-2 rotate-45 bg-terracotta md:-top-[5px] md:left-0" />
-            <Reveal delay={i * 100}>
-              <p className="eyebrow text-muted-foreground">Era 0{i + 1}</p>
-              <h3 className="mt-3 font-serif text-3xl font-medium">{t.era}</h3>
-              <p lang="te" className="font-te mt-1 text-lg text-maroon">{t.te}</p>
-              {t.image && (
-                <div className="mt-6 aspect-[4/3] max-w-xs overflow-hidden">
-                  <img src={t.image} alt="" loading="lazy" width={1280} height={1024} className="h-full w-full object-cover grayscale-[40%]" />
-                </div>
-              )}
-              <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">{t.text}</p>
-            </Reveal>
-          </li>
-        ))}
-      </ol>
     </section>
   );
 }
@@ -308,6 +271,7 @@ export function Stories() {
 
 export function GalleryGrid() {
   const [cat, setCat] = useState<(typeof galleryCategories)[number]>("All");
+  const [open, setOpen] = useState<number | null>(null);
   const items = gallery.filter((g) => cat === "All" || g.category === cat);
   return (
     <section id="gallery" className="bg-charcoal py-28 text-on-dark md:py-40">
@@ -327,13 +291,20 @@ export function GalleryGrid() {
           ))}
         </div>
         <div className="mt-12 grid auto-rows-[220px] grid-cols-2 gap-2 md:auto-rows-[260px] md:grid-cols-4">
-          {items.map((g) => (
-            <figure key={g.alt} className={cn("group relative overflow-hidden", cat === "All" && g.span)}>
+          {items.map((g, i) => (
+            <button
+              type="button"
+              key={g.alt}
+              onClick={() => setOpen(i)}
+              aria-label={`View image: ${g.alt}`}
+              className={cn("group relative overflow-hidden text-left", cat === "All" && g.span)}
+            >
               <img src={g.image} alt={g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.03]" />
-              <figcaption className="eyebrow absolute bottom-3 left-3 text-on-dark opacity-0 transition-opacity duration-500 group-hover:opacity-100">{g.category}</figcaption>
-            </figure>
+              <span className="eyebrow absolute bottom-3 left-3 text-on-dark opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">{g.category} ↗</span>
+            </button>
           ))}
         </div>
+        {open !== null && <GalleryLightbox items={items} index={open} onClose={() => setOpen(null)} onChange={setOpen} />}
         <div className="mt-12"><ArrowLink href="#gallery" tone="dark">Explore gallery</ArrowLink></div>
       </div>
     </section>
@@ -349,8 +320,8 @@ export function CTASection() {
           <p lang="te" className="font-te text-3xl text-gold md:text-4xl">మనతో కలిసి నడవండి</p>
           <h2 className="mt-8 font-serif text-6xl font-medium leading-none md:text-8xl">Be part of Sahiti</h2>
           <p className="eyebrow mt-10 text-on-dark-muted">Discover. Participate. Create. Celebrate.</p>
-          <a href="#join" className="eyebrow mt-14 inline-flex items-center gap-3 bg-ivory px-10 py-5 text-maroon transition-colors hover:bg-gold hover:text-charcoal">
-            Join Sahiti <span aria-hidden>→</span>
+          <a href="#join" className="group eyebrow mt-14 inline-flex items-center gap-3 bg-ivory px-10 py-5 text-maroon transition-colors hover:bg-gold hover:text-charcoal">
+            Join Sahiti <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">→</span>
           </a>
         </Reveal>
       </div>

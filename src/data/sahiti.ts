@@ -38,12 +38,12 @@ export const arts = [
 
 export type TimelineItem = { era: string; te: string; text: string; image?: string };
 export const timeline: TimelineItem[] = [
-  { era: "Ancient", te: "ప్రాచీనం", text: "Early inscriptions hint at a language already finding its shape." },
-  { era: "Satavahana", te: "శాతవాహన", text: "Trade, Prakrit courts and the roots of a regional identity.", image: history },
-  { era: "Kakatiya", te: "కాకతీయ", text: "Stone gateways, lakes and a flourishing of temple art.", image: history },
-  { era: "Vijayanagara", te: "విజయనగర", text: "A golden age of courtly poetry and patronage.", image: literature },
-  { era: "Colonial", te: "వలస యుగం", text: "Print, reform movements and a new modern prose." },
-  { era: "Modern", te: "ఆధునికం", text: "Cinema, diaspora and a language spoken across the world.", image: festival },
+  { era: "Ancient", te: "ప్రాచీనం", text: "Early inscriptions offer glimpses of a language taking shape." },
+  { era: "Satavahana", te: "శాతవాహన", text: "An era often associated with trade and the growth of a regional identity." },
+  { era: "Kakatiya", te: "కాకతీయ", text: "Remembered for its stone architecture and temple art.", image: history },
+  { era: "Vijayanagara", te: "విజయనగర", text: "A period known for courtly poetry and literary patronage.", image: literature },
+  { era: "Colonial", te: "వలస యుగం", text: "Printing presses and new forms of prose reached wider readers." },
+  { era: "Modern", te: "ఆధునికం", text: "Cinema, media and communities carrying Telugu around the world.", image: festival },
 ];
 
 export const literatureThemes = [
