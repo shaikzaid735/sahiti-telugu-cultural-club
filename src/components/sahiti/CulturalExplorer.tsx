@@ -81,7 +81,10 @@ export function CulturalExplorer({ areas }: { areas: CulturalArea[] }) {
             area={a}
             index={i}
             selected={i === selected}
-            onSelect={() => setSelected(i)}
+            onSelect={() => {
+              setSelected(i);
+              setPreviewed(null);
+            }}
             onPreview={() => setPreviewed(i)}
             onPreviewEnd={() => setPreviewed((p) => (p === i ? null : p))}
           />
