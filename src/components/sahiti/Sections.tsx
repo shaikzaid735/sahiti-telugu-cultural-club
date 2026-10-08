@@ -47,8 +47,8 @@ export function Hero() {
           A living expression of Telugu.
         </p>
         <div className="anim-rise mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8" style={{ animationDelay: "1.7s" }}>
-          <a href="#explore" className="eyebrow inline-flex items-center justify-center gap-3 bg-maroon px-8 py-5 text-on-dark transition-colors hover:bg-terracotta">
-            Explore Sahiti <span aria-hidden>→</span>
+          <a href="#explore" className="group eyebrow inline-flex items-center justify-center gap-3 bg-maroon px-8 py-5 text-on-dark transition-colors hover:bg-terracotta">
+            Explore Sahiti <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">→</span>
           </a>
           <ArrowLink href="#culture" tone="dark">Discover Telugu</ArrowLink>
         </div>
@@ -320,8 +320,8 @@ export function CTASection() {
           <p lang="te" className="font-te text-3xl text-gold md:text-4xl">మనతో కలిసి నడవండి</p>
           <h2 className="mt-8 font-serif text-6xl font-medium leading-none md:text-8xl">Be part of Sahiti</h2>
           <p className="eyebrow mt-10 text-on-dark-muted">Discover. Participate. Create. Celebrate.</p>
-          <a href="#join" className="eyebrow mt-14 inline-flex items-center gap-3 bg-ivory px-10 py-5 text-maroon transition-colors hover:bg-gold hover:text-charcoal">
-            Join Sahiti <span aria-hidden>→</span>
+          <a href="#join" className="group eyebrow mt-14 inline-flex items-center gap-3 bg-ivory px-10 py-5 text-maroon transition-colors hover:bg-gold hover:text-charcoal">
+            Join Sahiti <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">→</span>
           </a>
         </Reveal>
       </div>
