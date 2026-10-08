@@ -1,4 +1,4 @@
-# Exact Screenshot Match
+# Sahiti Telugu Cultural Club
 
 Implement exactly the screenshot and nothing else
 
