@@ -304,7 +304,7 @@ export function GalleryGrid() {
             </button>
           ))}
         </div>
-        {open !== null && <GalleryLightbox items={items} index={open} onClose={() => setOpen(null)} onChange={setOpen} />
+        {open !== null && <GalleryLightbox items={items} index={open} onClose={() => setOpen(null)} onChange={setOpen} />}
         <div className="mt-12"><ArrowLink href="#gallery" tone="dark">Explore gallery</ArrowLink></div>
       </div>
     </section>
