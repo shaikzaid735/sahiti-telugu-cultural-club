@@ -19,9 +19,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Sahiti (సాహితి) — A Living Expression of Telugu" },
-      { name: "description", content: "Sahiti is a Telugu cultural club celebrating language, literature, history, drama, music and dance." },
+      {
+        name: "description",
+        content:
+          "Sahiti is a Telugu cultural club celebrating language, literature, history, drama, music and dance.",
+      },
       { property: "og:title", content: "Sahiti (సాహితి) — A Living Expression of Telugu" },
-      { property: "og:description", content: "Discover Telugu language, literature, history and performing arts with Sahiti." },
+      {
+        property: "og:description",
+        content: "Discover Telugu language, literature, history and performing arts with Sahiti.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

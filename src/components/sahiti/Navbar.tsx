@@ -14,10 +14,14 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   return (
@@ -28,15 +32,23 @@ export function Navbar() {
           scrolled ? "bg-charcoal/80 py-3 backdrop-blur-md" : "bg-transparent py-6",
         )}
       >
-        <nav aria-label="Primary" className="mx-auto flex max-w-[1400px] items-center justify-between px-6 md:px-10">
+        <nav
+          aria-label="Primary"
+          className="mx-auto flex max-w-[1400px] items-center justify-between px-6 md:px-10"
+        >
           <a href="#top" className="flex items-baseline gap-3 text-on-dark">
-            <span lang="te" className="font-te text-2xl">సాహితి</span>
+            <span lang="te" className="font-te text-2xl">
+              సాహితి
+            </span>
             <span className="eyebrow text-on-dark-muted">Sahiti</span>
           </a>
           <ul className="hidden items-center gap-9 lg:flex">
             {navLinks.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="link-reveal pb-1 text-[0.8rem] tracking-wide text-on-dark-muted transition-colors hover:text-on-dark">
+                <a
+                  href={l.href}
+                  className="link-reveal pb-1 text-[0.8rem] tracking-wide text-on-dark-muted transition-colors hover:text-on-dark"
+                >
                   {l.label}
                 </a>
               </li>
@@ -71,8 +83,15 @@ export function Navbar() {
         )}
       >
         <div className="flex items-center justify-between">
-          <span lang="te" className="font-te text-2xl">సాహితి</span>
-          <button type="button" onClick={() => setOpen(false)} className="eyebrow p-2" tabIndex={open ? 0 : -1}>
+          <span lang="te" className="font-te text-2xl">
+            సాహితి
+          </span>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="eyebrow p-2"
+            tabIndex={open ? 0 : -1}
+          >
             Close
           </button>
         </div>

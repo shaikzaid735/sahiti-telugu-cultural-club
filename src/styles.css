@@ -78,26 +78,45 @@
   --input: oklch(0.19 0.005 30 / 0.2);
   --ring: var(--terracotta);
 
-  --overlay-hero: linear-gradient(180deg, oklch(0.12 0.01 20 / 0.55) 0%, oklch(0.12 0.01 20 / 0.2) 40%, oklch(0.12 0.01 20 / 0.85) 100%);
+  --overlay-hero: linear-gradient(
+    180deg,
+    oklch(0.12 0.01 20 / 0.55) 0%,
+    oklch(0.12 0.01 20 / 0.2) 40%,
+    oklch(0.12 0.01 20 / 0.85) 100%
+  );
   --overlay-card: linear-gradient(180deg, transparent 35%, oklch(0.12 0.01 20 / 0.88) 100%);
   --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-  ::selection { background: var(--maroon); color: var(--ivory); }
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--maroon);
+    color: var(--ivory);
+  }
 }
 
-@utility font-te { font-family: var(--font-telugu); }
-@utility font-te-sans { font-family: var(--font-telugu-sans); }
+@utility font-te {
+  font-family: var(--font-telugu);
+}
+@utility font-te-sans {
+  font-family: var(--font-telugu-sans);
+}
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: 0.7rem;
@@ -105,30 +124,90 @@
   text-transform: uppercase;
   font-weight: 500;
 }
-@utility bg-overlay-hero { background: var(--overlay-hero); }
-@utility bg-overlay-card { background: var(--overlay-card); }
+@utility bg-overlay-hero {
+  background: var(--overlay-hero);
+}
+@utility bg-overlay-card {
+  background: var(--overlay-card);
+}
 @utility link-reveal {
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 0% 1px;
   background-position: 0 100%;
   background-repeat: no-repeat;
   transition: background-size 0.5s var(--ease-editorial);
-  &:hover, &:focus-visible { background-size: 100% 1px; }
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
 }
 
 /* Load sequence */
-@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-@keyframes fade { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: scale(1); } }
-@keyframes drift { 0%,100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(8px); opacity: 1; } }
-.anim-fade { animation: fade 2.2s var(--ease-editorial) both; }
-.anim-rise { animation: rise 1.2s var(--ease-editorial) both; }
-.anim-drift { animation: drift 2.4s ease-in-out infinite; }
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+.anim-fade {
+  animation: fade 2.2s var(--ease-editorial) both;
+}
+.anim-rise {
+  animation: rise 1.2s var(--ease-editorial) both;
+}
+.anim-drift {
+  animation: drift 2.4s ease-in-out infinite;
+}
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s var(--ease-editorial), transform 1s var(--ease-editorial); }
-.reveal.is-visible { opacity: 1; transform: none; }
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 1s var(--ease-editorial),
+    transform 1s var(--ease-editorial);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
